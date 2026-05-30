@@ -21,673 +21,258 @@
     --radius: 16px;
     --radius-sm: 10px;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Tajawal', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* ===== BACKGROUND ===== */
+  body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
   body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(108,99,255,0.12) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 50% at 80% 80%, rgba(67,233,123,0.07) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: 0;
+    content: ''; position: fixed; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 20% 10%, rgba(108,99,255,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 80% 80%, rgba(67,233,123,0.07) 0%, transparent 50%);
+    pointer-events: none; z-index: 0;
   }
-
-  /* ===== LAYOUT ===== */
   #app { position: relative; z-index: 1; min-height: 100vh; }
-
   .container { max-width: 680px; margin: 0 auto; padding: 0 16px; }
 
-  /* ===== TOPBAR ===== */
+  /* TOPBAR */
   .topbar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(10,10,15,0.85);
-    backdrop-filter: blur(20px);
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,15,0.88); backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
-    padding: 14px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
+    padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px;
   }
-
-  .topbar-logo {
-    font-size: 22px;
-    font-weight: 900;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    cursor: pointer;
-    user-select: none;
-  }
-
-  .topbar-actions { display: flex; gap: 10px; align-items: center; }
-
-  .btn {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    padding: 9px 18px;
-    border-radius: 999px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s;
-    white-space: nowrap;
-  }
-
-  .btn-primary {
-    background: linear-gradient(135deg, var(--accent), #8b5cf6);
-    color: white;
-  }
-  .btn-primary:hover { opacity: 0.85; transform: scale(1.03); }
-
-  .btn-ghost {
-    background: var(--surface2);
-    color: var(--text);
-    border: 1px solid var(--border);
-  }
-  .btn-ghost:hover { background: var(--surface3); }
-
-  .btn-sm { padding: 6px 14px; font-size: 13px; }
-
+  .topbar-logo { font-size: 22px; font-weight: 900; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: pointer; }
   .user-chip {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 6px 14px 6px 10px;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text2);
-    cursor: pointer;
-    transition: background 0.2s;
+    display: flex; align-items: center; gap: 8px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 999px; padding: 5px 14px 5px 5px;
+    font-size: 14px; font-weight: 500; color: var(--text2); cursor: pointer; transition: background 0.2s;
   }
   .user-chip:hover { background: var(--surface3); }
-  .user-avatar {
-    width: 28px; height: 28px;
-    border-radius: 50%;
+  .user-avatar-img {
+    width: 32px; height: 32px; border-radius: 50%; object-fit: cover;
+    border: 2px solid var(--accent);
+  }
+  .user-avatar-placeholder {
+    width: 32px; height: 32px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 700; color: white;
+    font-size: 14px; font-weight: 700; color: white; flex-shrink: 0;
   }
 
-  /* ===== PAGES ===== */
+  /* BUTTONS */
+  .btn { font-family: 'Tajawal', sans-serif; font-size: 14px; font-weight: 600; padding: 9px 18px; border-radius: 999px; border: none; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+  .btn-primary { background: linear-gradient(135deg, var(--accent), #8b5cf6); color: white; }
+  .btn-primary:hover { opacity: 0.85; transform: scale(1.03); }
+  .btn-ghost { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+  .btn-ghost:hover { background: var(--surface3); }
+  .btn-danger { background: rgba(255,101,132,0.15); color: var(--accent2); border: 1px solid rgba(255,101,132,0.3); }
+  .btn-danger:hover { background: rgba(255,101,132,0.25); }
+  .btn-sm { padding: 6px 14px; font-size: 13px; }
+  .btn-xs { padding: 4px 10px; font-size: 12px; }
+
+  /* PAGES */
   .page { display: none; }
   .page.active { display: block; }
 
-  /* ===== HOME PAGE ===== */
-  .home-header {
-    padding: 40px 0 28px;
-    text-align: center;
-  }
-  .home-title {
-    font-size: 32px;
-    font-weight: 900;
-    line-height: 1.2;
-    margin-bottom: 10px;
-  }
-  .home-subtitle { color: var(--text2); font-size: 16px; }
-
-  .search-bar {
-    position: relative;
-    margin: 24px 0;
-  }
+  /* HOME */
+  .home-header { padding: 36px 0 24px; text-align: center; }
+  .home-title { font-size: 30px; font-weight: 900; margin-bottom: 8px; }
+  .home-subtitle { color: var(--text2); font-size: 15px; }
+  .search-bar { position: relative; margin: 20px 0; }
   .search-bar input {
-    width: 100%;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 14px 52px 14px 20px;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 15px;
-    color: var(--text);
-    outline: none;
-    transition: border-color 0.2s;
+    width: 100%; background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 999px; padding: 13px 50px 13px 20px;
+    font-family: 'Tajawal', sans-serif; font-size: 15px; color: var(--text); outline: none; transition: border-color 0.2s;
   }
   .search-bar input:focus { border-color: var(--accent); }
   .search-bar input::placeholder { color: var(--text3); }
-  .search-icon {
-    position: absolute;
-    left: 18px; top: 50%;
-    transform: translateY(-50%);
-    color: var(--text3);
-    font-size: 18px;
-  }
+  .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text3); font-size: 17px; }
+  .section-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text3); margin-bottom: 12px; }
+  .communities-grid { display: flex; flex-direction: column; gap: 10px; padding-bottom: 80px; }
 
-  .section-title {
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--text3);
-    margin-bottom: 14px;
-  }
-
-  /* ===== COMMUNITY CARDS ===== */
-  .communities-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding-bottom: 80px;
-  }
-
+  /* COMMUNITY CARD */
   .community-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 18px 20px;
-    cursor: pointer;
-    transition: all 0.2s;
-    position: relative;
-    overflow: hidden;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden; cursor: pointer; transition: all 0.2s;
   }
-  .community-card::before {
-    content: '';
-    position: absolute;
-    top: 0; right: 0;
-    width: 4px; height: 100%;
-    border-radius: 0 var(--radius) var(--radius) 0;
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-  .community-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(108,99,255,0.15);
-  }
-  .community-card:hover::before { opacity: 1; background: var(--accent); }
-
-  .card-top { display: flex; align-items: flex-start; gap: 14px; }
-  .card-icon {
-    width: 48px; height: 48px;
-    border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px;
-    flex-shrink: 0;
-  }
+  .community-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(108,99,255,0.15); }
+  .card-banner { height: 80px; display: flex; align-items: center; justify-content: center; font-size: 36px; position: relative; }
+  .card-banner-img { width: 100%; height: 100%; object-fit: cover; }
+  .card-body { padding: 14px 16px; }
+  .card-top { display: flex; align-items: flex-start; gap: 12px; }
+  .card-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; overflow: hidden; }
+  .card-icon img { width: 100%; height: 100%; object-fit: cover; }
   .card-info { flex: 1; min-width: 0; }
-  .card-name {
-    font-size: 17px;
-    font-weight: 700;
-    margin-bottom: 4px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .card-desc {
-    font-size: 14px;
-    color: var(--text2);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .card-meta {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-top: 14px;
-    font-size: 13px;
-    color: var(--text3);
-  }
-  .card-meta span { display: flex; align-items: center; gap: 5px; }
+  .card-name { font-size: 16px; font-weight: 700; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .card-desc { font-size: 13px; color: var(--text2); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .card-meta { display: flex; align-items: center; gap: 14px; margin-top: 12px; font-size: 12px; color: var(--text3); }
 
-  /* ===== FAB ===== */
+  /* FAB */
   .fab {
-    position: fixed;
-    bottom: 28px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(135deg, var(--accent), #8b5cf6);
-    color: white;
-    border: none;
-    border-radius: 999px;
-    padding: 16px 28px;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 8px 32px rgba(108,99,255,0.4);
-    z-index: 50;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--accent), #8b5cf6); color: white;
+    border: none; border-radius: 999px; padding: 15px 26px;
+    font-family: 'Tajawal', sans-serif; font-size: 15px; font-weight: 700;
+    cursor: pointer; box-shadow: 0 8px 32px rgba(108,99,255,0.4);
+    z-index: 50; transition: all 0.2s;
   }
-  .fab:hover { transform: translateX(-50%) scale(1.05); box-shadow: 0 12px 40px rgba(108,99,255,0.5); }
+  .fab:hover { transform: translateX(-50%) scale(1.05); }
 
-  /* ===== COMMUNITY PAGE ===== */
-  .community-header {
-    position: relative;
-    padding: 28px 0 20px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 20px;
-  }
-  .community-banner {
-    height: 130px;
-    border-radius: var(--radius);
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 48px;
-  }
-  .community-meta-row {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 12px;
-  }
-  .community-name-big { font-size: 24px; font-weight: 900; margin-bottom: 6px; }
-  .community-desc-big { color: var(--text2); font-size: 15px; line-height: 1.5; }
-  .community-stats {
-    display: flex;
-    gap: 20px;
-    margin-top: 14px;
-    font-size: 14px;
-    color: var(--text3);
-  }
+  /* COMMUNITY PAGE */
+  .community-header { border-bottom: 1px solid var(--border); margin-bottom: 0; }
+  .community-banner-wrap { height: 140px; position: relative; overflow: hidden; }
+  .community-banner-bg { width: 100%; height: 100%; object-fit: cover; }
+  .community-banner-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 52px; }
+  .community-info-row { padding: 14px 16px 16px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .community-name-big { font-size: 22px; font-weight: 900; margin-bottom: 4px; }
+  .community-desc-big { color: var(--text2); font-size: 14px; line-height: 1.5; }
+  .community-stats { display: flex; gap: 16px; margin-top: 10px; font-size: 13px; color: var(--text3); }
   .community-stats strong { color: var(--text); font-weight: 700; }
+  .mod-badge { background: rgba(108,99,255,0.2); color: var(--accent); border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 700; display: inline-block; margin-top: 6px; }
 
-  /* ===== TABS ===== */
-  .tabs {
-    display: flex;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 20px;
-  }
-  .tab {
-    flex: 1;
-    padding: 14px;
-    text-align: center;
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text3);
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    transition: all 0.2s;
-    background: none;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    font-family: 'Tajawal', sans-serif;
-  }
+  /* TABS */
+  .tabs { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+  .tab { flex: 1; padding: 13px; text-align: center; font-size: 14px; font-weight: 600; color: var(--text3); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; background: none; border-top: none; border-left: none; border-right: none; font-family: 'Tajawal', sans-serif; }
   .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-  .tab:hover:not(.active) { color: var(--text2); }
 
-  /* ===== POST COMPOSER ===== */
-  .composer {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px;
-    margin-bottom: 16px;
+  /* PINNED MSG */
+  .pinned-msg {
+    background: rgba(108,99,255,0.1); border: 1px solid rgba(108,99,255,0.3);
+    border-radius: var(--radius-sm); padding: 10px 14px; margin-bottom: 12px;
+    font-size: 13px; display: flex; align-items: flex-start; gap: 8px;
   }
-  .composer-top { display: flex; gap: 12px; align-items: flex-start; }
-  .composer-avatar {
-    width: 38px; height: 38px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px; font-weight: 700; color: white;
-    flex-shrink: 0;
-  }
-  .composer textarea {
-    flex: 1;
-    background: none;
-    border: none;
-    color: var(--text);
-    font-family: 'Tajawal', sans-serif;
-    font-size: 15px;
-    resize: none;
-    outline: none;
-    min-height: 70px;
-    line-height: 1.6;
-  }
+  .pinned-icon { font-size: 16px; flex-shrink: 0; }
+  .pinned-text { color: var(--text2); flex: 1; }
+  .pinned-author { color: var(--accent); font-weight: 700; font-size: 12px; }
+
+  /* COMPOSER */
+  .composer { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; margin-bottom: 14px; }
+  .composer-top { display: flex; gap: 10px; align-items: flex-start; }
+  .composer-avatar { width: 36px; height: 36px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+  .composer-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .composer-avatar-ph { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: white; flex-shrink: 0; }
+  .composer textarea { flex: 1; background: none; border: none; color: var(--text); font-family: 'Tajawal', sans-serif; font-size: 15px; resize: none; outline: none; min-height: 65px; line-height: 1.6; }
   .composer textarea::placeholder { color: var(--text3); }
-  .composer-bottom {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px solid var(--border);
-  }
+  .composer-bottom { display: flex; justify-content: flex-end; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
 
-  /* ===== POSTS ===== */
-  .post {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 18px 20px;
-    margin-bottom: 12px;
-    animation: fadeUp 0.3s ease;
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .post-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-  .post-avatar {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px; font-weight: 700; color: white;
-    flex-shrink: 0;
-  }
-  .post-author { font-weight: 700; font-size: 15px; }
-  .post-time { font-size: 12px; color: var(--text3); margin-right: auto; }
-  .post-body { font-size: 15px; line-height: 1.7; color: var(--text); margin-bottom: 14px; }
-  .post-actions { display: flex; gap: 20px; }
-  .post-action {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 13px; color: var(--text3);
-    cursor: pointer;
-    background: none; border: none; font-family: 'Tajawal', sans-serif;
-    transition: color 0.2s;
-    padding: 4px 0;
-  }
+  /* POSTS */
+  .post { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 10px; animation: fadeUp 0.3s ease; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .post-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .post-avatar { width: 34px; height: 34px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+  .post-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .post-avatar-ph { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+  .post-author { font-weight: 700; font-size: 14px; }
+  .post-author-role { font-size: 11px; color: var(--accent); font-weight: 600; }
+  .post-time { font-size: 11px; color: var(--text3); margin-right: auto; }
+  .post-body { font-size: 14px; line-height: 1.7; margin-bottom: 12px; }
+  .post-actions { display: flex; gap: 16px; align-items: center; }
+  .post-action { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text3); cursor: pointer; background: none; border: none; font-family: 'Tajawal', sans-serif; transition: color 0.2s; padding: 3px 0; }
   .post-action:hover { color: var(--accent); }
   .post-action.liked { color: var(--accent2); }
+  .post-mod-actions { margin-right: auto; display: flex; gap: 8px; }
 
-  /* ===== CHAT ===== */
-  .chat-container {
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 280px);
-    min-height: 400px;
-  }
-  .chat-messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 10px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--border) transparent;
-  }
-  .chat-msg {
-    display: flex;
-    gap: 10px;
-    animation: fadeUp 0.25s ease;
-  }
-  .chat-msg-avatar {
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 700; color: white;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .chat-msg-content {}
-  .chat-msg-name { font-size: 12px; font-weight: 700; margin-bottom: 4px; }
-  .chat-msg-bubble {
-    background: var(--surface2);
-    border-radius: 4px 14px 14px 14px;
-    padding: 10px 14px;
-    font-size: 14px;
-    line-height: 1.6;
-    max-width: 500px;
-    word-break: break-word;
-    border: 1px solid var(--border);
-  }
-  .chat-msg-time { font-size: 11px; color: var(--text3); margin-top: 4px; }
-
-  .chat-input-area {
-    padding: 14px 0 4px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    gap: 10px;
-    align-items: flex-end;
-  }
-  .chat-input {
-    flex: 1;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 12px 16px;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 14px;
-    color: var(--text);
-    resize: none;
-    outline: none;
-    min-height: 46px;
-    max-height: 120px;
-    transition: border-color 0.2s;
-    line-height: 1.5;
-  }
+  /* CHAT */
+  .chat-container { display: flex; flex-direction: column; height: calc(100vh - 300px); min-height: 380px; }
+  .chat-messages { flex: 1; overflow-y: auto; padding: 8px 0; display: flex; flex-direction: column; gap: 8px; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+  .chat-msg { display: flex; gap: 8px; animation: fadeUp 0.2s ease; position: relative; }
+  .chat-msg:hover .chat-msg-actions { opacity: 1; }
+  .chat-msg-avatar { width: 30px; height: 30px; border-radius: 50%; overflow: hidden; flex-shrink: 0; margin-top: 2px; }
+  .chat-msg-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .chat-msg-avatar-ph { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: white; flex-shrink: 0; margin-top: 2px; }
+  .chat-msg-name { font-size: 12px; font-weight: 700; margin-bottom: 3px; }
+  .chat-msg-name .role-badge { font-size: 10px; color: var(--accent); margin-right: 4px; }
+  .chat-msg-bubble { background: var(--surface2); border-radius: 4px 14px 14px 14px; padding: 9px 13px; font-size: 14px; line-height: 1.6; max-width: 500px; word-break: break-word; border: 1px solid var(--border); }
+  .chat-msg-bubble.pinned-bubble { border-color: rgba(108,99,255,0.4); background: rgba(108,99,255,0.08); }
+  .chat-msg-time { font-size: 10px; color: var(--text3); margin-top: 3px; }
+  .chat-msg-actions { opacity: 0; transition: opacity 0.2s; display: flex; gap: 6px; align-items: flex-start; margin-top: 2px; }
+  .chat-action-btn { background: var(--surface3); border: 1px solid var(--border); border-radius: 8px; padding: 4px 8px; font-size: 11px; cursor: pointer; color: var(--text2); font-family: 'Tajawal', sans-serif; transition: all 0.15s; white-space: nowrap; }
+  .chat-action-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+  .chat-action-btn.danger:hover { background: var(--accent2); border-color: var(--accent2); }
+  .chat-input-area { padding: 12px 0 2px; border-top: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-end; }
+  .chat-input { flex: 1; background: var(--surface2); border: 1px solid var(--border); border-radius: 14px; padding: 11px 15px; font-family: 'Tajawal', sans-serif; font-size: 14px; color: var(--text); resize: none; outline: none; min-height: 44px; max-height: 110px; transition: border-color 0.2s; line-height: 1.5; }
   .chat-input:focus { border-color: var(--accent); }
   .chat-input::placeholder { color: var(--text3); }
-  .chat-send {
-    width: 46px; height: 46px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), #8b5cf6);
-    border: none;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s;
-    flex-shrink: 0;
-  }
+  .chat-send { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #8b5cf6); border: none; color: white; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; flex-shrink: 0; }
   .chat-send:hover { opacity: 0.85; transform: scale(1.05); }
+  .banned-notice { text-align: center; padding: 20px; color: var(--accent2); font-size: 14px; background: rgba(255,101,132,0.08); border-radius: var(--radius-sm); margin: 10px 0; }
 
-  /* ===== MODAL ===== */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.7);
-    backdrop-filter: blur(8px);
-    z-index: 200;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.25s;
-  }
-  .modal-overlay.open {
-    opacity: 1;
-    pointer-events: all;
-  }
-  .modal {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 28px;
-    width: 100%;
-    max-width: 460px;
-    transform: scale(0.95) translateY(20px);
-    transition: transform 0.25s;
-  }
+  /* MODAL */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(8px); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 16px; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 24px; width: 100%; max-width: 460px; max-height: 90vh; overflow-y: auto; transform: scale(0.95) translateY(20px); transition: transform 0.25s; scrollbar-width: thin; }
   .modal-overlay.open .modal { transform: scale(1) translateY(0); }
-  .modal-title {
-    font-size: 20px;
-    font-weight: 900;
-    margin-bottom: 22px;
-  }
-
-  .form-group { margin-bottom: 18px; }
-  .form-label {
-    display: block;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text2);
-    margin-bottom: 8px;
-    letter-spacing: 0.5px;
-  }
-  .form-input, .form-textarea, .form-select {
-    width: 100%;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 12px 16px;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 15px;
-    color: var(--text);
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--accent); }
+  .modal-title { font-size: 19px; font-weight: 900; margin-bottom: 20px; }
+  .form-group { margin-bottom: 16px; }
+  .form-label { display: block; font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 7px; letter-spacing: 0.5px; }
+  .form-input, .form-textarea { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 11px 15px; font-family: 'Tajawal', sans-serif; font-size: 14px; color: var(--text); outline: none; transition: border-color 0.2s; }
+  .form-input:focus, .form-textarea:focus { border-color: var(--accent); }
   .form-input::placeholder, .form-textarea::placeholder { color: var(--text3); }
-  .form-textarea { resize: none; min-height: 90px; line-height: 1.6; }
-  .form-select { appearance: none; cursor: pointer; }
-
-  .emoji-grid {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    gap: 6px;
-    margin-top: 10px;
-  }
-  .emoji-btn {
-    width: 40px; height: 40px;
-    border-radius: 10px;
-    background: var(--surface2);
-    border: 2px solid transparent;
-    font-size: 20px;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.15s;
-  }
+  .form-textarea { resize: none; min-height: 80px; line-height: 1.6; }
+  .emoji-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 5px; margin-top: 8px; }
+  .emoji-btn { width: 38px; height: 38px; border-radius: 9px; background: var(--surface2); border: 2px solid transparent; font-size: 19px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
   .emoji-btn:hover { background: var(--surface3); transform: scale(1.1); }
   .emoji-btn.selected { border-color: var(--accent); background: rgba(108,99,255,0.15); }
-
-  .color-grid {
-    display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px;
-  }
-  .color-btn {
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    border: 2px solid transparent;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
+  .color-grid { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 8px; }
+  .color-btn { width: 30px; height: 30px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: all 0.15s; }
   .color-btn.selected { border-color: white; transform: scale(1.15); }
+  .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 20px; }
 
-  .modal-actions {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-    margin-top: 24px;
-  }
+  /* IMAGE UPLOAD */
+  .img-upload-wrap { position: relative; cursor: pointer; }
+  .img-upload-input { display: none; }
+  .img-upload-preview { width: 100%; height: 120px; border-radius: var(--radius-sm); border: 2px dashed var(--border); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 6px; color: var(--text3); font-size: 13px; transition: border-color 0.2s; overflow: hidden; cursor: pointer; }
+  .img-upload-preview:hover { border-color: var(--accent); }
+  .img-upload-preview img { width: 100%; height: 100%; object-fit: cover; }
+  .avatar-upload-preview { width: 80px; height: 80px; border-radius: 50%; border: 2px dashed var(--border); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px; color: var(--text3); font-size: 11px; cursor: pointer; overflow: hidden; transition: border-color 0.2s; }
+  .avatar-upload-preview:hover { border-color: var(--accent); }
+  .avatar-upload-preview img { width: 100%; height: 100%; object-fit: cover; }
 
-  /* ===== USERNAME MODAL ===== */
-  .username-modal .modal-title { text-align: center; font-size: 24px; }
-  .username-modal .welcome-icon {
-    text-align: center;
-    font-size: 52px;
-    margin-bottom: 16px;
-  }
-  .username-modal p {
-    color: var(--text2);
-    font-size: 15px;
-    text-align: center;
-    margin-bottom: 22px;
-    line-height: 1.6;
-  }
+  /* USERNAME MODAL */
+  .welcome-icon { text-align: center; font-size: 48px; margin-bottom: 12px; }
+  .modal-center-title { text-align: center; font-size: 22px; font-weight: 900; margin-bottom: 8px; }
+  .modal-subtitle { color: var(--text2); font-size: 14px; text-align: center; margin-bottom: 20px; line-height: 1.6; }
 
-  /* ===== EMPTY STATE ===== */
-  .empty {
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--text3);
-  }
-  .empty-icon { font-size: 48px; margin-bottom: 14px; }
-  .empty-text { font-size: 16px; margin-bottom: 6px; }
-  .empty-sub { font-size: 14px; }
+  /* MEMBERS / MOD PANEL */
+  .member-row { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .member-row:last-child { border-bottom: none; }
+  .member-name { flex: 1; font-size: 14px; font-weight: 600; }
+  .member-role { font-size: 11px; color: var(--accent); }
+  .member-actions { display: flex; gap: 6px; }
 
-  /* ===== LOADING ===== */
-  .loading {
-    text-align: center;
-    padding: 40px;
-    color: var(--text3);
-    font-size: 14px;
-  }
-  .spinner {
-    width: 28px; height: 28px;
-    border: 3px solid var(--border);
-    border-top-color: var(--accent);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    margin: 0 auto 12px;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  /* ===== BACK BTN ===== */
-  .back-btn {
-    display: flex; align-items: center; gap: 8px;
-    color: var(--text2);
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 600;
-    background: none;
-    border: none;
-    font-family: 'Tajawal', sans-serif;
-    padding: 10px 0;
-    transition: color 0.2s;
-  }
+  /* BACK */
+  .back-btn { display: flex; align-items: center; gap: 6px; color: var(--text2); cursor: pointer; font-size: 14px; font-weight: 600; background: none; border: none; font-family: 'Tajawal', sans-serif; padding: 10px 16px; transition: color 0.2s; }
   .back-btn:hover { color: var(--text); }
 
-  /* ===== TOAST ===== */
-  .toast {
-    position: fixed;
-    bottom: 90px;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 12px 22px;
-    font-size: 14px;
-    font-weight: 600;
-    z-index: 999;
-    opacity: 0;
-    transition: all 0.3s;
-    white-space: nowrap;
-  }
-  .toast.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
+  /* EMPTY / LOADING */
+  .empty { text-align: center; padding: 50px 20px; color: var(--text3); }
+  .empty-icon { font-size: 44px; margin-bottom: 12px; }
+  .loading { text-align: center; padding: 36px; color: var(--text3); font-size: 14px; }
+  .spinner { width: 26px; height: 26px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 10px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* ===== SCROLLBAR ===== */
-  ::-webkit-scrollbar { width: 6px; }
+  /* TOAST */
+  .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 11px 20px; font-size: 13px; font-weight: 600; z-index: 999; opacity: 0; transition: all 0.3s; white-space: nowrap; }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
   @media (max-width: 480px) {
-    .topbar { padding: 12px 14px; }
-    .topbar-logo { font-size: 18px; }
+    .topbar { padding: 10px 12px; }
+    .container { padding: 0 10px; }
     .home-title { font-size: 24px; }
-    .container { padding: 0 12px; }
   }
 </style>
 </head>
 <body>
-
 <div id="app">
 
   <!-- TOPBAR -->
   <div class="topbar">
     <div class="topbar-logo" onclick="showPage('home')">🌐 مجتمعات</div>
-    <div class="topbar-actions">
-      <div id="userChip" class="user-chip" onclick="showUsernameModal()">
-        <div class="user-avatar" id="topbarAvatar" style="background:#6c63ff">؟</div>
-        <span id="topbarName">اضغط لتحديد اسمك</span>
-      </div>
+    <div class="user-chip" onclick="showUsernameModal()" id="userChip">
+      <div id="topbarAvatarWrap"></div>
+      <span id="topbarName">حدد اسمك</span>
     </div>
   </div>
 
@@ -707,39 +292,40 @@
         <div class="loading"><div class="spinner"></div>جاري التحميل...</div>
       </div>
     </div>
-    <button class="fab" onclick="showCreateModal()">
-      ＋ إنشاء مجتمع
-    </button>
+    <button class="fab" onclick="showCreateModal()">＋ إنشاء مجتمع</button>
   </div>
 
   <!-- COMMUNITY PAGE -->
   <div id="page-community" class="page">
-    <div class="container">
-      <div class="community-header">
-        <button class="back-btn" onclick="showPage('home')">← رجوع</button>
-        <div class="community-banner" id="communityBanner"></div>
-        <div class="community-meta-row">
-          <div>
-            <div class="community-name-big" id="communityName"></div>
-            <div class="community-desc-big" id="communityDesc"></div>
-            <div class="community-stats">
-              <span><strong id="communityPostCount">0</strong> منشور</span>
-              <span><strong id="communityMsgCount">0</strong> رسالة</span>
-            </div>
+    <button class="back-btn" onclick="showPage('home')">← رجوع</button>
+    <div class="community-header">
+      <div class="community-banner-wrap" id="communityBannerWrap"></div>
+      <div class="community-info-row">
+        <div style="flex:1">
+          <div class="community-name-big" id="communityName"></div>
+          <div class="community-desc-big" id="communityDesc"></div>
+          <div class="community-stats">
+            <span><strong id="communityPostCount">0</strong> منشور</span>
+            <span><strong id="communityMsgCount">0</strong> رسالة</span>
           </div>
+          <div id="myRoleBadge"></div>
         </div>
+        <div id="communityModBtn"></div>
       </div>
+    </div>
 
+    <div class="container">
       <div class="tabs">
         <button class="tab active" onclick="switchTab('posts')" id="tab-posts">📝 المنشورات</button>
-        <button class="tab" onclick="switchTab('chat')" id="tab-chat">💬 التشات</button>
+        <button class="tab" onclick="switchTab('chat')" id="tab-chat">💬 المحادثة</button>
+        <button class="tab" onclick="switchTab('members')" id="tab-members">👥 الأعضاء</button>
       </div>
 
       <!-- POSTS TAB -->
       <div id="tab-content-posts">
-        <div class="composer">
+        <div class="composer" id="postComposer">
           <div class="composer-top">
-            <div class="composer-avatar" id="composerAvatar" style="background:#6c63ff">؟</div>
+            <div id="composerAvatarWrap"></div>
             <textarea id="postInput" placeholder="شارك شيئاً مع المجتمع..." rows="3"></textarea>
           </div>
           <div class="composer-bottom">
@@ -751,15 +337,21 @@
 
       <!-- CHAT TAB -->
       <div id="tab-content-chat" style="display:none">
+        <div id="pinnedMsgWrap"></div>
         <div class="chat-container">
           <div class="chat-messages" id="chatMessages"></div>
-          <div class="chat-input-area">
-            <textarea class="chat-input" id="chatInput" placeholder="اكتب رسالة..." rows="1"
-              onkeydown="if(event.key==='Enter' && !event.shiftKey){event.preventDefault();sendChat()}"
+          <div id="chatInputArea" class="chat-input-area">
+            <textarea class="chat-input" id="chatInput" placeholder="اكتب رسالة..."
+              onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}"
               oninput="autoResize(this)"></textarea>
             <button class="chat-send" onclick="sendChat()">↑</button>
           </div>
         </div>
+      </div>
+
+      <!-- MEMBERS TAB -->
+      <div id="tab-content-members" style="display:none">
+        <div id="membersList"></div>
       </div>
     </div>
   </div>
@@ -770,27 +362,32 @@
 <div class="modal-overlay" id="createModal">
   <div class="modal">
     <div class="modal-title">🏘️ إنشاء مجتمع جديد</div>
-
     <div class="form-group">
       <label class="form-label">اسم المجتمع</label>
       <input type="text" class="form-input" id="newCommunityName" placeholder="مثال: عشاق السيارات" maxlength="40">
     </div>
-
     <div class="form-group">
       <label class="form-label">وصف المجتمع</label>
       <textarea class="form-textarea" id="newCommunityDesc" placeholder="وش هو المجتمع هذا؟" maxlength="200"></textarea>
     </div>
-
     <div class="form-group">
-      <label class="form-label">الأيقونة</label>
+      <label class="form-label">صورة المجتمع (اختياري)</label>
+      <div class="img-upload-wrap" onclick="document.getElementById('communityImgInput').click()">
+        <div class="img-upload-preview" id="communityImgPreview">
+          <span style="font-size:28px">🖼️</span>
+          <span>اضغط لرفع صورة</span>
+        </div>
+        <input type="file" id="communityImgInput" class="img-upload-input" accept="image/*" onchange="handleCommunityImg(this)">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">الأيقونة (اختياري)</label>
       <div class="emoji-grid" id="emojiGrid"></div>
     </div>
-
     <div class="form-group">
       <label class="form-label">اللون</label>
       <div class="color-grid" id="colorGrid"></div>
     </div>
-
     <div class="modal-actions">
       <button class="btn btn-ghost" onclick="closeModal('createModal')">إلغاء</button>
       <button class="btn btn-primary" onclick="createCommunity()">إنشاء ✨</button>
@@ -800,147 +397,221 @@
 
 <!-- USERNAME MODAL -->
 <div class="modal-overlay" id="usernameModal">
-  <div class="modal username-modal">
+  <div class="modal">
     <div class="welcome-icon">👋</div>
-    <div class="modal-title">مرحباً!</div>
-    <p>اختر اسماً يظهر في المجتمعات. لا تحتاج حساب أو كلمة سر.</p>
-    <div class="form-group">
+    <div class="modal-center-title">مرحباً!</div>
+    <div class="modal-subtitle">اختر اسماً وصورة شخصية. لا تحتاج حساب.</div>
+    <div class="form-group" style="display:flex;align-items:center;gap:16px">
+      <div class="img-upload-wrap" onclick="document.getElementById('avatarImgInput').click()">
+        <div class="avatar-upload-preview" id="avatarImgPreview">
+          <span style="font-size:24px">📷</span>
+          <span style="font-size:10px">صورة</span>
+        </div>
+        <input type="file" id="avatarImgInput" class="img-upload-input" accept="image/*" onchange="handleAvatarImg(this)">
+      </div>
       <input type="text" class="form-input" id="usernameInput" placeholder="اسمك هنا..." maxlength="20"
-        onkeydown="if(event.key==='Enter') saveUsername()">
+        onkeydown="if(event.key==='Enter')saveUsername()" style="flex:1">
     </div>
-    <button class="btn btn-primary" style="width:100%;padding:14px" onclick="saveUsername()">دخول 🚀</button>
+    <button class="btn btn-primary" style="width:100%;padding:13px" onclick="saveUsername()">دخول 🚀</button>
   </div>
 </div>
 
-<!-- TOAST -->
+<!-- MOD PANEL MODAL -->
+<div class="modal-overlay" id="modModal">
+  <div class="modal">
+    <div class="modal-title">⚙️ لوحة الإدارة</div>
+    <div class="form-group">
+      <label class="form-label">إضافة مشرف (اكتب اسمه بالضبط)</label>
+      <div style="display:flex;gap:8px">
+        <input type="text" class="form-input" id="addModInput" placeholder="اسم المستخدم..." style="flex:1">
+        <button class="btn btn-primary btn-sm" onclick="addModerator()">إضافة</button>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">المشرفون الحاليون</label>
+      <div id="modsList"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('modModal')">إغلاق</button>
+    </div>
+  </div>
+</div>
+
+<!-- BAN MODAL -->
+<div class="modal-overlay" id="banModal">
+  <div class="modal">
+    <div class="modal-title" id="banModalTitle">🚫 حظر مستخدم</div>
+    <div class="form-group">
+      <label class="form-label">نوع الحظر</label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-ghost btn-sm" id="banTypePerm" onclick="setBanType('permanent')" style="flex:1">دائم</button>
+        <button class="btn btn-ghost btn-sm" id="banTypeTimeout" onclick="setBanType('timeout')" style="flex:1">مؤقت (Timeout)</button>
+      </div>
+    </div>
+    <div class="form-group" id="timeoutDurationWrap" style="display:none">
+      <label class="form-label">مدة الحظر</label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-ghost btn-sm" onclick="setTimeoutDuration(5)">5 دقائق</button>
+        <button class="btn btn-ghost btn-sm" onclick="setTimeoutDuration(60)">ساعة</button>
+        <button class="btn btn-ghost btn-sm" onclick="setTimeoutDuration(1440)">يوم</button>
+        <button class="btn btn-ghost btn-sm" onclick="setTimeoutDuration(10080)">أسبوع</button>
+      </div>
+      <input type="number" class="form-input" id="timeoutCustom" placeholder="أو اكتب عدد الدقائق..." style="margin-top:8px">
+    </div>
+    <div class="form-group">
+      <label class="form-label">سبب الحظر (اختياري)</label>
+      <input type="text" class="form-input" id="banReason" placeholder="مثال: مخالفة القواعد">
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('banModal')">إلغاء</button>
+      <button class="btn btn-danger" onclick="confirmBan()">تأكيد الحظر</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
-<!-- FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, increment,
-         query, orderBy, onSnapshot, serverTimestamp, getDoc }
+import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc,
+         increment, query, orderBy, onSnapshot, serverTimestamp, getDoc, setDoc, arrayUnion, arrayRemove }
   from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
 
-// ============================================================
-// 🔧 ضع هنا إعدادات Firebase الخاصة بك
-// ============================================================
 const firebaseConfig = {
   apiKey: "AIzaSyCcRQ-LSZKJZ4Q0kXgQEbvxwoWbs4rbC3Q",
   authDomain: "community-83601.firebaseapp.com",
   projectId: "community-83601",
   storageBucket: "community-83601.firebasestorage.app",
   messagingSenderId: "56412149109",
-  appId: "1:56412149109:web:84eca0988fb5c1ad2fef3c",
-  measurementId: "G-LZQEMMJ963"
+  appId: "1:56412149109:web:84eca0988fb5c1ad2fef3c"
 };
-// ============================================================
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 window.db = db;
 
-// ===== COLORS & EMOJIS =====
 const EMOJIS = ['🏀','⚽','🎮','🎵','📚','🍕','✈️','💻','🎨','🌍','🔬','💪','🎭','🤖','🌸','🦁','🏖️','🎯','🚗','💡','🎸','📸','🏋️','🌿','🎪','💎','🔥','⚡'];
 const COLORS = ['#6c63ff','#ff6584','#43e97b','#f7971e','#4facfe','#f953c6','#43cbff','#ff9a9e','#a18cd1','#ffecd2','#96fbc4','#f093fb'];
 
 let selectedEmoji = EMOJIS[0];
 let selectedColor = COLORS[0];
 let currentCommunityId = null;
+let currentCommunityData = null;
 let chatUnsubscribe = null;
 let allCommunities = [];
+let communityImgBase64 = null;
+let avatarImgBase64 = null;
+let banTargetUser = null;
+let banType = 'permanent';
+let timeoutMinutes = 60;
 
-// ===== USERNAME =====
+// ===== USER =====
 function getUsername() { return localStorage.getItem('mj_username') || ''; }
-function getUserColor() {
-  const u = getUsername();
-  if (!u) return '#6c63ff';
-  const colors = ['#6c63ff','#ff6584','#43e97b','#f7971e','#4facfe','#f953c6','#43cbff'];
-  return colors[u.charCodeAt(0) % colors.length];
+function getAvatar() { return localStorage.getItem('mj_avatar') || ''; }
+function colorFromName(name) {
+  const colors = ['#6c63ff','#ff6584','#43e97b','#f7971e','#4facfe','#f953c6','#43cbff','#f093fb'];
+  let h = 0; for (let i=0;i<name.length;i++) h = name.charCodeAt(i)+((h<<5)-h);
+  return colors[Math.abs(h)%colors.length];
 }
-function getInitial() {
-  const u = getUsername();
-  return u ? u[0] : '؟';
+function avatarHTML(name, avatarUrl, size=32) {
+  if (avatarUrl) return `<img src="${avatarUrl}" style="width:${size}px;height:${size}px;border-radius:50%;object-fit:cover">`;
+  const color = colorFromName(name||'؟');
+  return `<div style="width:${size}px;height:${size}px;border-radius:50%;background:${color};display:flex;align-items:center;justify-content:center;font-size:${size*0.4}px;font-weight:700;color:white;flex-shrink:0">${(name||'؟')[0]}</div>`;
+}
+
+function updateTopbar() {
+  const u = getUsername(); const av = getAvatar();
+  document.getElementById('topbarName').textContent = u || 'حدد اسمك';
+  document.getElementById('topbarAvatarWrap').innerHTML = avatarHTML(u||'؟', av, 28);
+  // composer
+  const cw = document.getElementById('composerAvatarWrap');
+  if (cw) cw.innerHTML = avatarHTML(u||'؟', av, 36);
+  // avatar preview
+  if (av) {
+    document.getElementById('avatarImgPreview').innerHTML = `<img src="${av}">`;
+  }
 }
 
 window.showUsernameModal = function() {
   document.getElementById('usernameInput').value = getUsername();
+  if (getAvatar()) document.getElementById('avatarImgPreview').innerHTML = `<img src="${getAvatar()}">`;
   openModal('usernameModal');
-  setTimeout(() => document.getElementById('usernameInput').focus(), 300);
+  setTimeout(()=>document.getElementById('usernameInput').focus(),300);
 };
-
 window.saveUsername = function() {
   const val = document.getElementById('usernameInput').value.trim();
   if (!val) { showToast('⚠️ اكتب اسمك أولاً'); return; }
   localStorage.setItem('mj_username', val);
+  if (avatarImgBase64) localStorage.setItem('mj_avatar', avatarImgBase64);
   closeModal('usernameModal');
   updateTopbar();
-  showToast('✅ تم حفظ اسمك!');
+  showToast('✅ تم الحفظ!');
 };
 
-function updateTopbar() {
-  const u = getUsername();
-  const chip = document.getElementById('topbarName');
-  const av = document.getElementById('topbarAvatar');
-  if (u) {
-    chip.textContent = u;
-    av.textContent = u[0];
-    av.style.background = getUserColor();
-  } else {
-    chip.textContent = 'اضغط لتحديد اسمك';
-    av.textContent = '؟';
-  }
-  document.getElementById('composerAvatar').style.background = getUserColor();
-  document.getElementById('composerAvatar').textContent = getInitial();
+// ===== IMAGE HANDLING =====
+function compressImage(file, maxW, maxH, quality) {
+  return new Promise(resolve => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let w = img.width, h = img.height;
+        if (w > maxW) { h = h*(maxW/w); w = maxW; }
+        if (h > maxH) { w = w*(maxH/h); h = maxH; }
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
 }
 
-// ===== EMOJI / COLOR GRIDS =====
+window.handleCommunityImg = async function(input) {
+  if (!input.files[0]) return;
+  const b64 = await compressImage(input.files[0], 800, 300, 0.7);
+  communityImgBase64 = b64;
+  document.getElementById('communityImgPreview').innerHTML = `<img src="${b64}">`;
+};
+window.handleAvatarImg = async function(input) {
+  if (!input.files[0]) return;
+  const b64 = await compressImage(input.files[0], 200, 200, 0.8);
+  avatarImgBase64 = b64;
+  document.getElementById('avatarImgPreview').innerHTML = `<img src="${b64}">`;
+};
+
+// ===== EMOJI / COLOR =====
 function buildEmojiGrid() {
-  const grid = document.getElementById('emojiGrid');
-  grid.innerHTML = EMOJIS.map((e,i) =>
+  document.getElementById('emojiGrid').innerHTML = EMOJIS.map((e,i)=>
     `<button class="emoji-btn${i===0?' selected':''}" onclick="selectEmoji('${e}',this)">${e}</button>`
   ).join('');
 }
 function buildColorGrid() {
-  const grid = document.getElementById('colorGrid');
-  grid.innerHTML = COLORS.map((c,i) =>
+  document.getElementById('colorGrid').innerHTML = COLORS.map((c,i)=>
     `<button class="color-btn${i===0?' selected':''}" onclick="selectColor('${c}',this)" style="background:${c}"></button>`
   ).join('');
 }
-
-window.selectEmoji = function(e, btn) {
-  selectedEmoji = e;
-  document.querySelectorAll('.emoji-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-};
-window.selectColor = function(c, btn) {
-  selectedColor = c;
-  document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-};
+window.selectEmoji = (e,btn) => { selectedEmoji=e; document.querySelectorAll('.emoji-btn').forEach(b=>b.classList.remove('selected')); btn.classList.add('selected'); };
+window.selectColor = (c,btn) => { selectedColor=c; document.querySelectorAll('.color-btn').forEach(b=>b.classList.remove('selected')); btn.classList.add('selected'); };
 
 // ===== PAGES =====
 window.showPage = function(page) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + page).classList.add('active');
-  if (page === 'home') {
-    if (chatUnsubscribe) { chatUnsubscribe(); chatUnsubscribe = null; }
-    currentCommunityId = null;
-    loadCommunities();
-  }
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  if (page==='home') { if(chatUnsubscribe){chatUnsubscribe();chatUnsubscribe=null;} currentCommunityId=null; loadCommunities(); }
 };
 
-// ===== MODAL =====
 function openModal(id) { document.getElementById(id).classList.add('open'); }
-window.closeModal = function(id) { document.getElementById(id).classList.remove('open'); };
+window.closeModal = id => document.getElementById(id).classList.remove('open');
 window.showCreateModal = function() {
   if (!requireUsername()) return;
-  buildEmojiGrid();
-  buildColorGrid();
-  document.getElementById('newCommunityName').value = '';
-  document.getElementById('newCommunityDesc').value = '';
-  selectedEmoji = EMOJIS[0];
-  selectedColor = COLORS[0];
+  buildEmojiGrid(); buildColorGrid();
+  document.getElementById('newCommunityName').value='';
+  document.getElementById('newCommunityDesc').value='';
+  document.getElementById('communityImgPreview').innerHTML='<span style="font-size:28px">🖼️</span><span>اضغط لرفع صورة</span>';
+  communityImgBase64=null; selectedEmoji=EMOJIS[0]; selectedColor=COLORS[0];
   openModal('createModal');
 };
 
@@ -949,21 +620,20 @@ window.createCommunity = async function() {
   const name = document.getElementById('newCommunityName').value.trim();
   const desc = document.getElementById('newCommunityDesc').value.trim();
   if (!name) { showToast('⚠️ اكتب اسم المجتمع'); return; }
-
   try {
-    await addDoc(collection(db, 'communities'), {
+    await addDoc(collection(db,'communities'), {
       name, desc, emoji: selectedEmoji, color: selectedColor,
-      createdBy: getUsername(),
-      createdAt: serverTimestamp(),
-      postCount: 0,
-      msgCount: 0
+      image: communityImgBase64||null,
+      createdBy: getUsername(), createdAt: serverTimestamp(),
+      postCount: 0, msgCount: 0,
+      moderators: [getUsername()],
+      bannedUsers: [],
+      pinnedMessage: null
     });
     closeModal('createModal');
     showToast('✅ تم إنشاء المجتمع!');
     loadCommunities();
-  } catch (e) {
-    showToast('❌ حدث خطأ: ' + e.message);
-  }
+  } catch(e) { showToast('❌ '+e.message); }
 };
 
 // ===== LOAD COMMUNITIES =====
@@ -971,252 +641,375 @@ window.loadCommunities = async function() {
   const grid = document.getElementById('communitiesGrid');
   grid.innerHTML = '<div class="loading"><div class="spinner"></div>جاري التحميل...</div>';
   try {
-    const snap = await getDocs(query(collection(db, 'communities'), orderBy('createdAt','desc')));
-    allCommunities = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    const snap = await getDocs(query(collection(db,'communities'),orderBy('createdAt','desc')));
+    allCommunities = snap.docs.map(d=>({id:d.id,...d.data()}));
     renderCommunities(allCommunities);
-  } catch (e) {
-    grid.innerHTML = `<div class="empty"><div class="empty-icon">⚠️</div><div class="empty-text">تعذر التحميل</div><div class="empty-sub">${e.message}</div></div>`;
+  } catch(e) {
+    grid.innerHTML=`<div class="empty"><div class="empty-icon">⚠️</div><div>${e.message}</div></div>`;
   }
 };
-
 function renderCommunities(list) {
   const grid = document.getElementById('communitiesGrid');
-  if (!list.length) {
-    grid.innerHTML = `<div class="empty"><div class="empty-icon">🌐</div><div class="empty-text">لا توجد مجتمعات بعد</div><div class="empty-sub">كن أول من ينشئ مجتمعاً!</div></div>`;
-    return;
-  }
-  grid.innerHTML = list.map(c => `
+  if (!list.length) { grid.innerHTML='<div class="empty"><div class="empty-icon">🌐</div><div class="empty-text">لا توجد مجتمعات</div></div>'; return; }
+  grid.innerHTML = list.map(c=>`
     <div class="community-card" onclick="openCommunity('${c.id}')">
-      <div class="card-top">
-        <div class="card-icon" style="background:${c.color}22;font-size:26px">${c.emoji}</div>
-        <div class="card-info">
-          <div class="card-name">${c.name}</div>
-          <div class="card-desc">${c.desc || 'لا يوجد وصف'}</div>
-        </div>
+      <div class="card-banner" style="background:linear-gradient(135deg,${c.color}33,${c.color}11)">
+        ${c.image ? `<img class="card-banner-img" src="${c.image}">` : `<span style="font-size:36px">${c.emoji}</span>`}
       </div>
-      <div class="card-meta">
-        <span>📝 ${c.postCount||0} منشور</span>
-        <span>💬 ${c.msgCount||0} رسالة</span>
-        <span>👤 ${c.createdBy||'مجهول'}</span>
+      <div class="card-body">
+        <div class="card-top">
+          <div class="card-icon" style="background:${c.color}22">${c.emoji}</div>
+          <div class="card-info">
+            <div class="card-name">${c.name}</div>
+            <div class="card-desc">${c.desc||'لا يوجد وصف'}</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span>📝 ${c.postCount||0}</span>
+          <span>💬 ${c.msgCount||0}</span>
+          <span>👤 ${c.createdBy||'مجهول'}</span>
+        </div>
       </div>
     </div>
   `).join('');
 }
-
 window.filterCommunities = function() {
   const q = document.getElementById('searchInput').value.toLowerCase();
-  const filtered = allCommunities.filter(c =>
-    c.name.toLowerCase().includes(q) || (c.desc||'').toLowerCase().includes(q)
-  );
-  renderCommunities(filtered);
+  renderCommunities(allCommunities.filter(c=>c.name.toLowerCase().includes(q)||(c.desc||'').toLowerCase().includes(q)));
 };
 
 // ===== OPEN COMMUNITY =====
 window.openCommunity = async function(id) {
   currentCommunityId = id;
   showPage('community');
-
   try {
-    const snap = await getDoc(doc(db, 'communities', id));
-    const c = snap.data();
+    const snap = await getDoc(doc(db,'communities',id));
+    currentCommunityData = {id, ...snap.data()};
+    const c = currentCommunityData;
     document.getElementById('communityName').textContent = c.name;
-    document.getElementById('communityDesc').textContent = c.desc || '';
-    document.getElementById('communityBanner').style.background = `linear-gradient(135deg, ${c.color}33, ${c.color}11)`;
-    document.getElementById('communityBanner').textContent = c.emoji;
+    document.getElementById('communityDesc').textContent = c.desc||'';
     document.getElementById('communityPostCount').textContent = c.postCount||0;
     document.getElementById('communityMsgCount').textContent = c.msgCount||0;
-  } catch(e) {}
 
-  switchTab('posts');
+    // banner
+    const bw = document.getElementById('communityBannerWrap');
+    if (c.image) bw.innerHTML=`<img class="community-banner-bg" src="${c.image}">`;
+    else bw.innerHTML=`<div class="community-banner-placeholder" style="background:linear-gradient(135deg,${c.color}33,${c.color}11)">${c.emoji}</div>`;
+
+    // my role
+    const isMod = isModerator(c);
+    const isOwner = c.createdBy === getUsername();
+    document.getElementById('myRoleBadge').innerHTML = isOwner ? '<span class="mod-badge">👑 صاحب المجتمع</span>' : isMod ? '<span class="mod-badge">🛡️ مشرف</span>' : '';
+
+    // mod button
+    document.getElementById('communityModBtn').innerHTML = isMod ?
+      `<button class="btn btn-ghost btn-sm" onclick="openModPanel()">⚙️ إدارة</button>` : '';
+
+    switchTab('posts');
+  } catch(e) { showToast('❌ '+e.message); }
 };
+
+function isModerator(c) {
+  const u = getUsername();
+  return u && (c.createdBy===u || (c.moderators&&c.moderators.includes(u)));
+}
+function isUserBanned(c) {
+  const u = getUsername();
+  if (!u || !c.bannedUsers) return false;
+  const ban = c.bannedUsers.find(b=>b.username===u);
+  if (!ban) return false;
+  if (ban.type==='permanent') return true;
+  if (ban.type==='timeout') {
+    if (Date.now() < ban.until) return true;
+    // expired - remove
+    updateDoc(doc(db,'communities',currentCommunityId),{bannedUsers: arrayRemove(ban)});
+    return false;
+  }
+  return false;
+}
 
 // ===== TABS =====
 window.switchTab = function(tab) {
-  ['posts','chat'].forEach(t => {
-    document.getElementById('tab-content-' + t).style.display = t===tab ? 'block' : 'none';
-    document.getElementById('tab-' + t).classList.toggle('active', t===tab);
+  ['posts','chat','members'].forEach(t=>{
+    document.getElementById('tab-content-'+t).style.display = t===tab?'block':'none';
+    document.getElementById('tab-'+t).classList.toggle('active',t===tab);
   });
-  if (tab === 'posts') loadPosts();
-  if (tab === 'chat') {
-    document.getElementById('tab-content-chat').style.display = 'flex';
-    document.getElementById('tab-content-chat').style.flexDirection = 'column';
-    loadChat();
-  }
+  if (tab==='chat') { document.getElementById('tab-content-chat').style.display='flex'; document.getElementById('tab-content-chat').style.flexDirection='column'; loadChat(); }
+  if (tab==='posts') loadPosts();
+  if (tab==='members') loadMembers();
 };
 
 // ===== POSTS =====
 window.loadPosts = async function() {
   const list = document.getElementById('postsList');
-  list.innerHTML = '<div class="loading"><div class="spinner"></div>جاري التحميل...</div>';
+  list.innerHTML='<div class="loading"><div class="spinner"></div>جاري التحميل...</div>';
   try {
-    const snap = await getDocs(query(
-      collection(db,'communities',currentCommunityId,'posts'),
-      orderBy('createdAt','desc')
-    ));
-    if (snap.empty) {
-      list.innerHTML = `<div class="empty"><div class="empty-icon">📝</div><div class="empty-text">لا توجد منشورات بعد</div><div class="empty-sub">شارك أول منشور!</div></div>`;
-      return;
-    }
-    list.innerHTML = snap.docs.map(d => {
-      const p = d.data();
-      const time = p.createdAt ? timeAgo(p.createdAt.toDate()) : '';
-      const color = colorFromName(p.author||'؟');
+    const snap = await getDocs(query(collection(db,'communities',currentCommunityId,'posts'),orderBy('createdAt','desc')));
+    if (snap.empty) { list.innerHTML='<div class="empty"><div class="empty-icon">📝</div><div>لا توجد منشورات بعد</div></div>'; return; }
+    const c = currentCommunityData;
+    list.innerHTML = snap.docs.map(d=>{
+      const p=d.data(); const time=p.createdAt?timeAgo(p.createdAt.toDate()):'';
+      const isMod2 = isModerator(c);
+      const isOwnerPost = p.author===getUsername();
       return `
         <div class="post">
           <div class="post-header">
-            <div class="post-avatar" style="background:${color}">${(p.author||'؟')[0]}</div>
+            <div class="post-avatar">${avatarHTML(p.author||'؟',p.authorAvatar||'',34)}</div>
             <div>
-              <div class="post-author">${p.author||'مجهول'}</div>
+              <div class="post-author">${p.author||'مجهول'} ${(c.moderators&&c.moderators.includes(p.author))?'<span class="post-author-role">🛡️ مشرف</span>':''} ${c.createdBy===p.author?'<span class="post-author-role">👑</span>':''}</div>
               <div class="post-time">${time}</div>
             </div>
           </div>
           <div class="post-body">${escHtml(p.body)}</div>
           <div class="post-actions">
-            <button class="post-action" onclick="likePost('${d.id}',this)">
-              ❤️ <span>${p.likes||0}</span>
-            </button>
+            <button class="post-action" onclick="likePost('${d.id}',this)">❤️ <span>${p.likes||0}</span></button>
+            ${isMod2?`<div class="post-mod-actions"><button class="btn btn-danger btn-xs" onclick="deletePost('${d.id}')">🗑️ حذف</button>${!isOwnerPost?`<button class="btn btn-ghost btn-xs" onclick="openBanModal('${p.author}')">🚫 حظر</button>`:''}</div>`:''}
           </div>
-        </div>
-      `;
+        </div>`;
     }).join('');
-  } catch(e) {
-    list.innerHTML = `<div class="empty"><div class="empty-icon">⚠️</div><div class="empty-text">${e.message}</div></div>`;
-  }
+  } catch(e) { list.innerHTML=`<div class="empty"><div class="empty-icon">⚠️</div><div>${e.message}</div></div>`; }
 };
 
 window.submitPost = async function() {
   if (!requireUsername()) return;
+  if (isUserBanned(currentCommunityData)) { showToast('🚫 أنت محظور من هذا المجتمع'); return; }
   const body = document.getElementById('postInput').value.trim();
   if (!body) { showToast('⚠️ اكتب شيئاً أولاً'); return; }
   try {
-    await addDoc(collection(db,'communities',currentCommunityId,'posts'), {
-      body, author: getUsername(),
+    await addDoc(collection(db,'communities',currentCommunityId,'posts'),{
+      body, author: getUsername(), authorAvatar: getAvatar(),
       createdAt: serverTimestamp(), likes: 0
     });
-    await updateDoc(doc(db,'communities',currentCommunityId), { postCount: increment(1) });
-    document.getElementById('postInput').value = '';
+    await updateDoc(doc(db,'communities',currentCommunityId),{postCount:increment(1)});
+    document.getElementById('postInput').value='';
     showToast('✅ تم النشر!');
     loadPosts();
-    document.getElementById('communityPostCount').textContent =
-      parseInt(document.getElementById('communityPostCount').textContent||0)+1;
-  } catch(e) { showToast('❌ ' + e.message); }
+    document.getElementById('communityPostCount').textContent=parseInt(document.getElementById('communityPostCount').textContent||0)+1;
+  } catch(e) { showToast('❌ '+e.message); }
 };
 
-window.likePost = async function(postId, btn) {
+window.likePost = async function(postId,btn) {
   try {
-    await updateDoc(doc(db,'communities',currentCommunityId,'posts',postId), { likes: increment(1) });
-    const span = btn.querySelector('span');
-    span.textContent = parseInt(span.textContent)+1;
-    btn.classList.add('liked');
-    btn.disabled = true;
+    await updateDoc(doc(db,'communities',currentCommunityId,'posts',postId),{likes:increment(1)});
+    const span=btn.querySelector('span'); span.textContent=parseInt(span.textContent)+1;
+    btn.classList.add('liked'); btn.disabled=true;
   } catch(e) {}
+};
+window.deletePost = async function(postId) {
+  if (!confirm('تأكيد حذف المنشور؟')) return;
+  try {
+    await deleteDoc(doc(db,'communities',currentCommunityId,'posts',postId));
+    await updateDoc(doc(db,'communities',currentCommunityId),{postCount:increment(-1)});
+    showToast('✅ تم الحذف');
+    loadPosts();
+  } catch(e) { showToast('❌ '+e.message); }
 };
 
 // ===== CHAT =====
 window.loadChat = function() {
   if (chatUnsubscribe) chatUnsubscribe();
   const msgs = document.getElementById('chatMessages');
-  msgs.innerHTML = '<div class="loading"><div class="spinner"></div>جاري التحميل...</div>';
+  msgs.innerHTML='<div class="loading"><div class="spinner"></div></div>';
+  const c = currentCommunityData;
+
+  // pinned
+  const pw = document.getElementById('pinnedMsgWrap');
+  if (c.pinnedMessage) {
+    pw.innerHTML=`<div class="pinned-msg"><span class="pinned-icon">📌</span><div class="pinned-text"><span class="pinned-author">${c.pinnedMessage.author}: </span>${escHtml(c.pinnedMessage.body)}</div></div>`;
+  } else pw.innerHTML='';
+
+  // banned check
+  const banned = isUserBanned(c);
+  const inputArea = document.getElementById('chatInputArea');
+  if (banned) {
+    inputArea.innerHTML='<div class="banned-notice">🚫 أنت محظور من هذا المجتمع ولا يمكنك إرسال رسائل</div>';
+  } else {
+    inputArea.innerHTML=`<textarea class="chat-input" id="chatInput" placeholder="اكتب رسالة..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}" oninput="autoResize(this)"></textarea><button class="chat-send" onclick="sendChat()">↑</button>`;
+  }
 
   chatUnsubscribe = onSnapshot(
-    query(collection(db,'communities',currentCommunityId,'messages'), orderBy('createdAt','asc')),
-    snap => {
-      msgs.innerHTML = '';
-      if (snap.empty) {
-        msgs.innerHTML = `<div class="empty"><div class="empty-icon">💬</div><div class="empty-text">لا توجد رسائل بعد</div><div class="empty-sub">ابدأ المحادثة!</div></div>`;
-        return;
-      }
-      snap.docs.forEach(d => {
-        const m = d.data();
-        const color = colorFromName(m.author||'؟');
-        const time = m.createdAt ? m.createdAt.toDate().toLocaleTimeString('ar',{hour:'2-digit',minute:'2-digit'}) : '';
-        const div = document.createElement('div');
-        div.className = 'chat-msg';
-        div.innerHTML = `
-          <div class="chat-msg-avatar" style="background:${color}">${(m.author||'؟')[0]}</div>
+    query(collection(db,'communities',currentCommunityId,'messages'),orderBy('createdAt','asc')),
+    snap=>{
+      msgs.innerHTML='';
+      if (snap.empty) { msgs.innerHTML='<div class="empty"><div class="empty-icon">💬</div><div>لا توجد رسائل بعد</div></div>'; return; }
+      const isMod2 = isModerator(c);
+      snap.docs.forEach(d=>{
+        const m=d.data();
+        const time=m.createdAt?m.createdAt.toDate().toLocaleTimeString('ar',{hour:'2-digit',minute:'2-digit'}):'';
+        const isPinned = c.pinnedMessage&&c.pinnedMessage.id===d.id;
+        const div=document.createElement('div');
+        div.className='chat-msg';
+        const isOwnerMsg = m.author===getUsername();
+        const modActions = isMod2 ? `
+          <div class="chat-msg-actions">
+            <button class="chat-action-btn" onclick="pinMessage('${d.id}','${escAttr(m.body)}','${m.author}')">📌 تثبيت</button>
+            <button class="chat-action-btn danger" onclick="deleteMessage('${d.id}')">🗑️</button>
+            ${!isOwnerMsg?`<button class="chat-action-btn danger" onclick="openBanModal('${m.author}')">🚫</button>`:''}
+          </div>` : '';
+        div.innerHTML=`
+          <div class="chat-msg-avatar">${avatarHTML(m.author||'؟',m.authorAvatar||'',30)}</div>
           <div class="chat-msg-content">
-            <div class="chat-msg-name">${m.author||'مجهول'}</div>
-            <div class="chat-msg-bubble">${escHtml(m.body)}</div>
+            <div class="chat-msg-name">${m.author||'مجهول'}${(c.moderators&&c.moderators.includes(m.author))?'<span class="role-badge">🛡️</span>':''} ${c.createdBy===m.author?'<span class="role-badge">👑</span>':''}</div>
+            <div class="chat-msg-bubble${isPinned?' pinned-bubble':''}">${escHtml(m.body)}</div>
             <div class="chat-msg-time">${time}</div>
           </div>
-        `;
+          ${modActions}`;
         msgs.appendChild(div);
       });
-      msgs.scrollTop = msgs.scrollHeight;
+      msgs.scrollTop=msgs.scrollHeight;
     }
   );
 };
 
 window.sendChat = async function() {
   if (!requireUsername()) return;
+  if (isUserBanned(currentCommunityData)) { showToast('🚫 أنت محظور'); return; }
   const input = document.getElementById('chatInput');
-  const body = input.value.trim();
-  if (!body) return;
+  if (!input) return;
+  const body=input.value.trim(); if (!body) return;
   try {
-    input.value = '';
-    input.style.height = 'auto';
-    await addDoc(collection(db,'communities',currentCommunityId,'messages'), {
-      body, author: getUsername(), createdAt: serverTimestamp()
+    input.value=''; input.style.height='auto';
+    await addDoc(collection(db,'communities',currentCommunityId,'messages'),{
+      body, author:getUsername(), authorAvatar:getAvatar(), createdAt:serverTimestamp()
     });
-    await updateDoc(doc(db,'communities',currentCommunityId), { msgCount: increment(1) });
-    document.getElementById('communityMsgCount').textContent =
-      parseInt(document.getElementById('communityMsgCount').textContent||0)+1;
-  } catch(e) { showToast('❌ ' + e.message); }
+    await updateDoc(doc(db,'communities',currentCommunityId),{msgCount:increment(1)});
+    document.getElementById('communityMsgCount').textContent=parseInt(document.getElementById('communityMsgCount').textContent||0)+1;
+  } catch(e) { showToast('❌ '+e.message); }
+};
+
+window.deleteMessage = async function(msgId) {
+  try {
+    await deleteDoc(doc(db,'communities',currentCommunityId,'messages',msgId));
+    showToast('✅ تم حذف الرسالة');
+  } catch(e) { showToast('❌ '+e.message); }
+};
+
+window.pinMessage = async function(msgId, body, author) {
+  try {
+    await updateDoc(doc(db,'communities',currentCommunityId),{pinnedMessage:{id:msgId,body,author}});
+    currentCommunityData.pinnedMessage={id:msgId,body,author};
+    showToast('📌 تم تثبيت الرسالة');
+    loadChat();
+  } catch(e) { showToast('❌ '+e.message); }
+};
+
+// ===== MEMBERS =====
+window.loadMembers = async function() {
+  const list = document.getElementById('membersList');
+  list.innerHTML='<div class="loading"><div class="spinner"></div></div>';
+  try {
+    // collect unique users from messages+posts
+    const [postsSnap, msgsSnap] = await Promise.all([
+      getDocs(collection(db,'communities',currentCommunityId,'posts')),
+      getDocs(collection(db,'communities',currentCommunityId,'messages'))
+    ]);
+    const users = {};
+    [...postsSnap.docs,...msgsSnap.docs].forEach(d=>{
+      const a=d.data().author; if(a&&!users[a]) users[a]={name:a,avatar:d.data().authorAvatar||''};
+    });
+    // add owner
+    const owner = currentCommunityData.createdBy;
+    if (owner&&!users[owner]) users[owner]={name:owner,avatar:''};
+
+    const c=currentCommunityData; const isMod2=isModerator(c);
+    const entries=Object.values(users);
+    if (!entries.length) { list.innerHTML='<div class="empty"><div class="empty-icon">👥</div><div>لا يوجد أعضاء بعد</div></div>'; return; }
+
+    list.innerHTML=entries.map(u=>{
+      const isOwner2=u.name===c.createdBy;
+      const isMod3=c.moderators&&c.moderators.includes(u.name);
+      const isBanned=c.bannedUsers&&c.bannedUsers.find(b=>b.username===u.name);
+      return `<div class="member-row">
+        ${avatarHTML(u.name,u.avatar,36)}
+        <div class="member-name">${u.name} ${isOwner2?'<span class="member-role">👑 صاحب</span>':isMod3?'<span class="member-role">🛡️ مشرف</span>':''} ${isBanned?'<span style="color:var(--accent2);font-size:11px">🚫 محظور</span>':''}</div>
+        ${isMod2&&!isOwner2?`<div class="member-actions"><button class="btn btn-ghost btn-xs" onclick="openBanModal('${u.name}')">🚫 حظر</button></div>`:''}
+      </div>`;
+    }).join('');
+  } catch(e) { list.innerHTML=`<div class="empty"><div class="empty-icon">⚠️</div><div>${e.message}</div></div>`; }
+};
+
+// ===== MOD PANEL =====
+window.openModPanel = function() {
+  const c=currentCommunityData;
+  document.getElementById('modsList').innerHTML=(c.moderators||[]).map(m=>
+    m===c.createdBy?`<div class="member-row">${avatarHTML(m,'',32)}<div class="member-name">${m} <span class="member-role">👑 صاحب</span></div></div>`:
+    `<div class="member-row">${avatarHTML(m,'',32)}<div class="member-name">${m} <span class="member-role">🛡️ مشرف</span></div><button class="btn btn-danger btn-xs" onclick="removeModerator('${m}')">إزالة</button></div>`
+  ).join('')||'<div style="color:var(--text3);font-size:13px;padding:8px">لا يوجد مشرفون</div>';
+  document.getElementById('addModInput').value='';
+  openModal('modModal');
+};
+window.addModerator = async function() {
+  const name=document.getElementById('addModInput').value.trim();
+  if (!name) { showToast('⚠️ اكتب اسم المشرف'); return; }
+  try {
+    await updateDoc(doc(db,'communities',currentCommunityId),{moderators:arrayUnion(name)});
+    currentCommunityData.moderators=[...(currentCommunityData.moderators||[]),name];
+    showToast('✅ تم إضافة المشرف'); openModPanel();
+  } catch(e) { showToast('❌ '+e.message); }
+};
+window.removeModerator = async function(name) {
+  try {
+    await updateDoc(doc(db,'communities',currentCommunityId),{moderators:arrayRemove(name)});
+    currentCommunityData.moderators=(currentCommunityData.moderators||[]).filter(m=>m!==name);
+    showToast('✅ تم إزالة المشرف'); openModPanel();
+  } catch(e) { showToast('❌ '+e.message); }
+};
+
+// ===== BAN =====
+window.openBanModal = function(username) {
+  banTargetUser=username; banType='permanent'; timeoutMinutes=60;
+  document.getElementById('banModalTitle').textContent=`🚫 حظر: ${username}`;
+  document.getElementById('banReason').value='';
+  document.getElementById('timeoutDurationWrap').style.display='none';
+  document.getElementById('banTypePerm').style.background='var(--accent)';document.getElementById('banTypePerm').style.color='white';
+  document.getElementById('banTypeTimeout').style.background='';document.getElementById('banTypeTimeout').style.color='';
+  openModal('banModal');
+};
+window.setBanType = function(type) {
+  banType=type;
+  document.getElementById('timeoutDurationWrap').style.display=type==='timeout'?'block':'none';
+  document.getElementById('banTypePerm').style.background=type==='permanent'?'var(--accent)':'';
+  document.getElementById('banTypePerm').style.color=type==='permanent'?'white':'';
+  document.getElementById('banTypeTimeout').style.background=type==='timeout'?'var(--accent)':'';
+  document.getElementById('banTypeTimeout').style.color=type==='timeout'?'white':'';
+};
+window.setTimeoutDuration = function(mins) { timeoutMinutes=mins; document.getElementById('timeoutCustom').value=mins; };
+window.confirmBan = async function() {
+  if (!banTargetUser) return;
+  const reason=document.getElementById('banReason').value.trim();
+  const custom=parseInt(document.getElementById('timeoutCustom')?.value)||timeoutMinutes;
+  const banObj = banType==='permanent'
+    ? {username:banTargetUser,type:'permanent',reason,bannedAt:Date.now()}
+    : {username:banTargetUser,type:'timeout',until:Date.now()+(custom*60000),reason,bannedAt:Date.now()};
+  try {
+    // remove old ban if exists
+    const oldBan=(currentCommunityData.bannedUsers||[]).find(b=>b.username===banTargetUser);
+    if(oldBan) await updateDoc(doc(db,'communities',currentCommunityId),{bannedUsers:arrayRemove(oldBan)});
+    await updateDoc(doc(db,'communities',currentCommunityId),{bannedUsers:arrayUnion(banObj)});
+    currentCommunityData.bannedUsers=[...(currentCommunityData.bannedUsers||[]).filter(b=>b.username!==banTargetUser),banObj];
+    closeModal('banModal');
+    const msg=banType==='permanent'?`🚫 تم حظر ${banTargetUser} بشكل دائم`:`⏱️ تم حظر ${banTargetUser} لمدة ${custom} دقيقة`;
+    showToast(msg);
+    if(document.getElementById('tab-members').classList.contains('active')) loadMembers();
+  } catch(e) { showToast('❌ '+e.message); }
 };
 
 // ===== HELPERS =====
-function requireUsername() {
-  if (!getUsername()) { showUsernameModal(); return false; }
-  return true;
-}
-
-function colorFromName(name) {
-  const colors = ['#6c63ff','#ff6584','#43e97b','#f7971e','#4facfe','#f953c6','#43cbff','#f093fb'];
-  let hash = 0;
-  for (let i=0; i<name.length; i++) hash = name.charCodeAt(i) + ((hash<<5)-hash);
-  return colors[Math.abs(hash) % colors.length];
-}
-
+function requireUsername() { if(!getUsername()){showUsernameModal();return false;} return true; }
 function timeAgo(date) {
-  const s = Math.floor((new Date() - date) / 1000);
-  if (s < 60) return 'الآن';
-  if (s < 3600) return `منذ ${Math.floor(s/60)} دقيقة`;
-  if (s < 86400) return `منذ ${Math.floor(s/3600)} ساعة`;
-  return `منذ ${Math.floor(s/86400)} يوم`;
+  const s=Math.floor((new Date()-date)/1000);
+  if(s<60) return 'الآن'; if(s<3600) return `منذ ${Math.floor(s/60)} د`; if(s<86400) return `منذ ${Math.floor(s/3600)} س`; return `منذ ${Math.floor(s/86400)} ي`;
 }
-
-function escHtml(str) {
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-            .replace(/\n/g,'<br>');
-}
-
-window.autoResize = function(el) {
-  el.style.height = 'auto';
-  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
-};
-
-window.showToast = function(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2500);
-};
+function escHtml(str) { return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>'); }
+function escAttr(str) { return str.replace(/"/g,'&quot;').replace(/'/g,'&#39;').substring(0,100); }
+window.autoResize = el => { el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,110)+'px'; };
+window.showToast = msg => { const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2500); };
 
 // ===== INIT =====
 updateTopbar();
 loadCommunities();
-
-if (!getUsername()) {
-  setTimeout(() => openModal('usernameModal'), 600);
-}
-
-// Close modal on overlay click
-document.querySelectorAll('.modal-overlay').forEach(o => {
-  o.addEventListener('click', e => {
-    if (e.target === o) o.classList.remove('open');
-  });
-});
-
+if (!getUsername()) setTimeout(()=>openModal('usernameModal'),600);
+document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');}));
 </script>
 </body>
 </html>
